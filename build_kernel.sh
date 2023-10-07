@@ -4,8 +4,8 @@ set -e
 [ ! -e "scripts/packaging/pack.sh" ] && git submodule init && git submodule update
 [ ! -d "toolchain" ] && echo "Make toolchain avaliable at $(pwd)/toolchain" && exit
 
-export KBUILD_BUILD_USER=Royna
-export KBUILD_BUILD_HOST=GrassLand
+export KBUILD_BUILD_USER=Tuki
+export KBUILD_BUILD_HOST=TukiLand
 
 PATH=$PWD/toolchain/bin:$PATH
 
@@ -20,7 +20,7 @@ CONFIG_KSU=vendor/ksu.config
 fi
 
 if [ -z "$DEVICE" ]; then
-export DEVICE=a51
+export DEVICE=m31
 fi
 
 rm -rf out
