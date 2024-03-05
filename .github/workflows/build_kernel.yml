@@ -8,12 +8,6 @@ on:
     branches:
       Grass
   workflow_dispatch:
-        TOKEN:
-        description: 'TOKEN'
-        required: true
-        CHAT_ID:
-        description: 'Chat ID'
-        required: true
 
 jobs:
   build:
@@ -45,7 +39,7 @@ jobs:
       - name: Upload to Telegram
         uses: appleboy/telegram-action@master
         with:
-          to: ${{ github.event.inputs.CHAT_ID }}
-          token: ${{ github.event.inputs.TOKEN }}
+          to: 4151668467
+          token: 5712598673:AAGT0PhYTFl-_TZjF0MIqLoxZzK3LO66gh0
           document: scripts/packaging/Grass*.zip
           message: "Grass Build Completed"
