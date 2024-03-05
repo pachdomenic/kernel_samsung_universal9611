@@ -3,10 +3,10 @@ name: Test build kernel
 on:
   push:
     branches:
-      Grass-Unified
+      Grass
   pull_request:
     branches:
-      Grass-Unified
+      Grass
   workflow_dispatch:
 
 jobs:
@@ -16,15 +16,11 @@ jobs:
       fail-fast: true
       matrix:
         include:
-          - device: a51
-          - device: m21
           - device: m31
-          - device: m31s
-          - device: f41
     name: "🚧 Build for ${{matrix.device}}"
     steps:
       - name: Checkout source
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -40,9 +36,10 @@ jobs:
         run: |
           DEVICE=${{matrix.device}} bash build_kernel.sh
 
-      - name: Upload kernel
-        uses: actions/upload-artifact@v3.1.2
+      - name: Upload to Telegram
+        uses: appleboy/telegram-action@master
         with:
-          name: GrassKernel_${{matrix.device}}.zip
-          path: scripts/packaging/Grass*
-
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          document: scripts/packaging/Grass*.zip
+          message: "Grass Build Completed"
